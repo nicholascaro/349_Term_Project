@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom"; //BrowserRouter to keep our UI in sync with the URL.
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,4 +11,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
