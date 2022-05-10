@@ -8,10 +8,10 @@ const Subscription = (props) => (
         <td>{props.subscription.email}</td>
 
         <td>
-            < Link className="btn btn-link" to={`/edit/${props.subscription.id}`}> Update </Link> | 
+            < Link className="btn btn-link" to={`/edit/${props.subscription._id}`}> Update </Link> | 
             <button className="btn btn-link"
                 onClick={() => {
-                    props.deleteSubscription(props.record._id); 
+                    props.deleteSubscription(props.subscription._id); 
                 }}
             > 
             Delete Subscription
@@ -25,10 +25,10 @@ export default function SubscriptionList (){
     
     useEffect(() => {
         async function getSubscriptions() {
-            const response = await fetch (`http://localhost:3000/getAll/`); 
+            const response = await fetch (`http://localhost:3001/getAll/`); 
 
             if (!response.ok){
-                const message = `An error occured: ${response.statusText}`; 
+                const message = `An error /getAll occured: ${response.statusText}`; 
                 window.alert(message); 
                 return; 
             }
@@ -46,12 +46,12 @@ export default function SubscriptionList (){
 
 
     async function deleteSubscription(id) {
-        await fetch(`http://localhost:300//deleleOne/${id}`, {
+        await fetch(`http://localhost:3001/deleteOne/${id}`, {
             method: "DELETE"
         }); 
-
-        const newSubscription = subscriptions.filter((el) => el._id !== id); 
-        setSubscriptions(newSubscription); 
+        console.log("Check Point")
+        const newSubscriptions = subscriptions.filter((el) => el._id !== id); 
+        setSubscriptions(newSubscriptions); 
 
     }
 

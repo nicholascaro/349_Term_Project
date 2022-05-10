@@ -4,9 +4,9 @@ import { useParams, useNavigate } from "react-router";
 export default function Edit() {
     const [form, setForm] = useState({
         name: "", 
-        cost: 0, 
+        cost: "", 
         email: "", 
-        records: []
+        records: [],
     }); 
 
     const params =  useParams(); 
@@ -15,7 +15,7 @@ export default function Edit() {
     useEffect(() => {
         async function fetchData() {
             const id = params.id.toString(); 
-            const responce = await fetch(`http://localhost:3000/getOne/${params.id.toString()}`); 
+            const responce = await fetch(`http://localhost:3001/getOne/${params.id.toString()}`); 
 
             if (!responce.ok){
                 const message = `Error occured: ${responce.statusText}`
@@ -25,7 +25,7 @@ export default function Edit() {
 
             const subscription = await responce.json(); 
             if (!subscription){
-                window.alert(`Record with id ${id} not found`); 
+                window.alert(`Subscription with id ${id} not found`); 
                 navigate("/"); 
                 return; 
             }
@@ -54,7 +54,7 @@ export default function Edit() {
             email: form.email,
         }; 
 
-        await fetch(`http://localhost:3000/updateOne/${params.id}`, {
+        await fetch(`http://localhost:3001/updateOne/${params.id}`, {
             method: "POST", 
             body: JSON.stringify(editedSubscription), 
             headers:{
@@ -82,13 +82,13 @@ export default function Edit() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="price"> Price of Subscription</label>
+                    <label htmlFor="cost"> Price of Subscription</label>
                     <input 
                     type= "text"
                     className="form-control"
                     id="cost"
                     value={form.cost}
-                    onChange={(e) => updateForm({ name: e.target.value})}
+                    onChange={(e) => updateForm({ cost: e.target.value})}
                     />
                 </div>
                 <div className="form-group">
@@ -98,7 +98,7 @@ export default function Edit() {
                     className="form-control"
                     id="email"
                     value={form.email}
-                    onChange={(e) => updateForm({ name: e.target.value})}
+                    onChange={(e) => updateForm({ email: e.target.value})}
                     />
                 </div>
 

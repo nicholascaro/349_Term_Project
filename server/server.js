@@ -1,21 +1,19 @@
 const express = require('express');
 const app = express();
-
 const cors = require("cors"); 
 
 require('dotenv').config({path: "./configure.env"});
-const PORT = process.env.PORT
+const port = process.env.PORT || 3001
 app.use(cors()); 
 app.use(express.json())
-const routes = require('./routes/routes');
+app.use(require("./routes/routes")); 
 
  // connect to databas
 const dbo = require("./models/model")
 
-app.listen(PORT, () => {
+app.listen(port, () => {
     dbo.connectToServer(function (err){
         if (err) console.log(err); 
     }); 
-
-    console.log(`Server Started at port ${PORT}`); 
+    console.log(`Server Started at port ${port}`); 
 })

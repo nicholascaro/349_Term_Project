@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 export default function Create() {
     const [form, setForm] = useState({
         name: "", 
-        cost: 0, 
+        cost: "", 
         email: "", 
     }); 
 
@@ -24,7 +24,7 @@ export default function Create() {
         // When a post request is sent to the create url, we'll add a new subscription object to the database.
         const newSubscription = { ...form}; 
 
-        await fetch("http://localhost:3000/createOne", {
+        await fetch("http://localhost:3001/createOne", {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function Create() {
             return; 
         }); 
 
-        setForm({name: "", cost: 0, email: ""}); 
+        setForm({name: "", cost: "", email: ""}); 
         navigate("/"); 
     }
 
@@ -55,13 +55,13 @@ export default function Create() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="price"> Price of Subscription</label>
+                    <label htmlFor="cost"> Price of Subscription</label>
                     <input 
                     type= "text"
                     className="form-control"
                     id="cost"
                     value={form.cost}
-                    onChange={(e) => updateForm({ name: e.target.value})}
+                    onChange={(e) => updateForm({ cost: e.target.value})}
                     />
                 </div>
                 <div className="form-group">
@@ -71,7 +71,7 @@ export default function Create() {
                     className="form-control"
                     id="email"
                     value={form.email}
-                    onChange={(e) => updateForm({ name: e.target.value})}
+                    onChange={(e) => updateForm({ email: e.target.value})}
                     />
                 </div>
                 <div className="form-group"> 

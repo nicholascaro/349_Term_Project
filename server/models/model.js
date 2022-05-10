@@ -3,8 +3,8 @@ const { MongoClient} = require("mongodb");
 const dbString = process.env.DATABASE_URL; 
 
 const client = new MongoClient(dbString, {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 
 var _db;
@@ -12,9 +12,10 @@ var _db;
 module.exports = {
     connectToServer: function(callback) {
         client.connect(function (err, db) {
+            
             if (db)
             {
-                _db = db.db("349project"); 
+                _db = db.db("project"); 
                 console.log("Successfuly Connected to MongoDB"); 
             }
 
